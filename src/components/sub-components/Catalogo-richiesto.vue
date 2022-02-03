@@ -13,7 +13,13 @@
             <img class="language-flag-style" :src="require(`../../assets/img/flags/${film.original_language}.png`)" alt="">
         </li>
 
-        <li> {{film.vote_average}}</li>
+        <li v-if ="film.vote_average == 0"> &#9734; &#9734; &#9734; &#9734; &#9734; </li>
+        <li v-else-if ="film.vote_average == 1"> &#9733; &#9734; &#9734; &#9734; &#9734; </li>
+        <li v-else-if ="film.vote_average == 2"> &#9733; &#9733; &#9734; &#9734; &#9734; </li>
+        <li v-else-if ="film.vote_average == 3"> &#9733; &#9733; &#9733; &#9734; &#9734;</li>
+        <li v-else-if ="film.vote_average == 4"> &#9733; &#9733; &#9733; &#9733; &#9734;</li>
+        <li v-else> &#9733; &#9733; &#9733; &#9733; &#9733; </li>
+
     </ul>
 </template>
 

@@ -58,6 +58,12 @@ export default {
                 .then( (response) => {
                     this.rispostaApiTV = response.data.results;
                     this.rispostaApi = this.rispostaApiMovie.concat(this.rispostaApiTV);
+                    this.rispostaApi.forEach(element => {
+                        return element.vote_average = this.getStelline(element.vote_average);
+                        
+                    });
+
+                    
 
             })
             })
@@ -70,6 +76,9 @@ export default {
             this.ricercaUtente = inputUtente;
             console.log(this.ricercaUtente);
             this.getCatalogo();
+        },
+        getStelline(num){
+            return Math.round((num)/2).toFixed(0);
         }
     }
 }
