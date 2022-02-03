@@ -1,6 +1,7 @@
 <template>
     <ul>
-        <li> <img :src="'https://image.tmdb.org/t/p/w92/'+ film.poster_path" alt=""></li>
+        <li v-if="film.poster_path != null"> <img :src="'https://image.tmdb.org/t/p/w92/'+ film.poster_path" alt=""></li>
+        <li v-else> <img src="../../assets/img/flags/none.png" alt="" style="height: 138px; width: 92px"></li>
 
         <li v-if="film.title != undefined">{{film.title}}</li>
         <li v-else> {{film.name}}</li>
@@ -12,7 +13,7 @@
             <img class="language-flag-style" :src="require(`../../assets/img/flags/${film.original_language}.png`)" alt="">
         </li>
 
-        <li>{{film.vote_average}}</li>
+        <li> {{film.vote_average}}</li>
     </ul>
 </template>
 
