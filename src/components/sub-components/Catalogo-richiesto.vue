@@ -1,7 +1,7 @@
 <template>
     <ul>
-        <li>{{film.title}}</li>
-        <li>{{film.original_title}}</li>
+        <li>{{film.title}} {{film.name}}</li>
+        <li>{{film.original_title}} {{film.original_name}}</li>
 
         <li v-if="film.original_language == 'it'"> 
             <img src="../../assets/img/it-flag.png" alt=""> 

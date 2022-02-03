@@ -31,6 +31,8 @@ export default {
     data(){
         return{
             ricercaUtente: "",
+            rispostaApiMovie: [],
+            rispostaApiTV: [],
             rispostaApi: [],
         }
     },
@@ -45,8 +47,19 @@ export default {
                 }
             })
             .then( (response) => {
-                this.rispostaApi = response.data.results;
-                console.log(this.rispostaApi);
+                this.rispostaApiMovie = response.data.results;
+                axios.get('https://api.themoviedb.org/3/search/tv', {
+                params: {
+                    api_key: 'c118f218a2e8045c8dc9d93ebeb85c9b',
+                    language: 'it-IT',
+                    query: this.ricercaUtente,
+                }
+            })
+                .then( (response) => {
+                    this.rispostaApiTV = response.data.results;
+                    this.rispostaApi = this.rispostaApiMovie.concat(this.rispostaApiTV);
+
+            })
             })
             .catch(function (error) {
                 console.log(error);
