@@ -1,5 +1,5 @@
 <template>
-    <div class="col">
+    <div class="col d-flex justify-content-end align-items-center">
         <input type="text" 
         name="inputUtente" 
         id="ricercaUtente" 

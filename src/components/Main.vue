@@ -1,19 +1,26 @@
 <template>
   <div>
+    <header>
+        <div class="container">
+            <div class="row d-flex justify-content-space-around">
+                <div class="col-9 d-flex align-items-center">
+                    <h1>Boolflix</h1> 
+                </div>
+                <Ricerca-utente 
+                @filtra="catalogoScelto"/> 
+            </div>
+        </div>
+    </header>
+    <main>
       <div class="container">
-          <div class="row">
-              <Ricerca-utente
-              @filtra="catalogoScelto"/>
-          </div>
-          <div class="row mt-5">
-              <div class="col">
+          <div class="row d-flex justify-content-space-around">
                 <Catalogo-richiesto 
                 v-for="(element, index) in rispostaApi"
                 :key="index"
                 :film=element />
-              </div>
           </div>
       </div>
+    </main>
   </div>
 </template>
 
@@ -25,7 +32,7 @@ import axios from 'axios'
 export default {
     components: { 
         CatalogoRichiesto,
-        RicercaUtente 
+        RicercaUtente,
         },
     name: "Main",
     data(){
@@ -60,11 +67,7 @@ export default {
                     this.rispostaApi = this.rispostaApiMovie.concat(this.rispostaApiTV);
                     this.rispostaApi.forEach(element => {
                         return element.vote_average = this.getStelline(element.vote_average);
-                        
                     });
-
-                    
-
             })
             })
             .catch(function (error) {
@@ -86,5 +89,17 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/style/globals.scss';
+    header{
+        width: 100%;
+        background-color: black; 
+        h1{
+            color: red;
+            text-transform: uppercase;
+        }
+    }
+    main{
+        min-height: calc(100vh - 56px);
+        background-color: grey ;
+    }
 
 </style>
