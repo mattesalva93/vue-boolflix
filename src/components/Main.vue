@@ -19,8 +19,8 @@
 
 <script>
 import CatalogoRichiesto from './sub-components/Catalogo-richiesto.vue'
-import axios from 'axios'
 import RicercaUtente from './sub-components/Ricerca-utente.vue'
+import axios from 'axios'
 
 export default {
     components: { 
