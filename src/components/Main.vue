@@ -66,7 +66,8 @@ export default {
                     this.rispostaApiTV = response.data.results;
                     this.rispostaApi = this.rispostaApiMovie.concat(this.rispostaApiTV);
                     this.rispostaApi.forEach(element => {
-                        return element.vote_average = this.getStelline(element.vote_average);
+                        element.voto_arrotondato = {};
+                        return element.voto_arrotondato = this.getStelline(element.vote_average);
                     });
             })
             })
@@ -81,7 +82,7 @@ export default {
             this.getCatalogo();
         },
         getStelline(num){
-            return Math.round((num)/2).toFixed(0);
+            return Math.ceil((num)/2);
         }
     }
 }

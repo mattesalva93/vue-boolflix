@@ -6,7 +6,7 @@
                     <img :src="'https://image.tmdb.org/t/p/w342/'+ film.poster_path" alt="">
                 </div>
                 <div v-else>
-                    <img src="../../assets/img/flags/none.png" alt="">
+                    <img src="https://www.omil.it/images/no_image.png" alt="">
                 </div>
             </div>
 
@@ -18,15 +18,14 @@
                 <div v-else>TITOLO-ORIGINALE: {{film.original_name}} </div>
 
                 <div>
+                    LINGUA:
                     <img class="language-flag-style" :src="require(`../../assets/img/flags/${film.original_language}.png`)" alt="">
                 </div>
-
-                <div v-if ="film.vote_average == 0">SCORE: &#9734; &#9734; &#9734; &#9734; &#9734; </div>
-                <div v-else-if ="film.vote_average == 1">SCORE: &#9733; &#9734; &#9734; &#9734; &#9734; </div>
-                <div v-else-if ="film.vote_average == 2">SCORE: &#9733; &#9733; &#9734; &#9734; &#9734; </div>
-                <div v-else-if ="film.vote_average == 3">SCORE: &#9733; &#9733; &#9733; &#9734; &#9734; </div>
-                <div v-else-if ="film.vote_average == 4">SCORE: &#9733; &#9733; &#9733; &#9733; &#9734; </div>
-                <div v-else>SCORE: &#9733; &#9733; &#9733; &#9733; &#9733; </div>
+                <div>
+                    SCORE:
+                    <i v-for="(elemento, index) in film.voto_arrotondato" :key="index" class="fas fa-star"></i>
+                    <i v-for="(elemento, index) in (5 - film.voto_arrotondato) " :key="index" class="far fa-star"></i>                
+                </div>
             </div>
         </div>
     </div>
@@ -44,7 +43,8 @@ export default {
 
 <style lang="scss" scoped>
     .film-container{
-        background-color: white;
+        color: white;
+        background-color: black;
         height: 456px;
         width: 100%;
         &:hover .film-poster{
@@ -77,6 +77,12 @@ export default {
         }
         .film-info{
             display: none;
+            border: 3px white solid;
+            height: 456px;
+
+            .fa-star{
+                color: gold;
+            }
 
         }
     }
