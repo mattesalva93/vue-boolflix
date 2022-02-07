@@ -13,12 +13,25 @@
     </header>
     <main>
       <div class="container">
-          <div class="row d-flex justify-content-space-around">
-                <Catalogo-richiesto 
-                v-for="(element, index) in rispostaApi"
-                :key="index"
-                :film=element />
-          </div>
+            <div v-if="caricato != true" class="row d-flex justify-content-space-around">
+
+            </div>
+            <div v-else>
+                <div class="row d-flex justify-content-space-around">
+                    <h1>Movies</h1>
+                    <Catalogo-richiesto 
+                    v-for="(element, index) in rispostaApiMovie"
+                    :key="index"
+                    :film=element />
+                </div>
+                <div class="row d-flex justify-content-space-around">
+                    <h1>Series</h1>
+                    <Catalogo-richiesto 
+                    v-for="(element, index) in rispostaApiTV"
+                    :key="index"
+                    :film=element />
+                </div>
+            </div>
       </div>
     </main>
   </div>
@@ -41,6 +54,7 @@ export default {
             rispostaApiMovie: [],
             rispostaApiTV: [],
             rispostaApi: [],
+            caricato: false,
         }
     },
     methods: {
@@ -55,6 +69,10 @@ export default {
             })
             .then( (response) => {
                 this.rispostaApiMovie = response.data.results;
+                this.rispostaApiMovie.forEach(element => {
+                        element.voto_arrotondato = {};
+                        return element.voto_arrotondato = this.getStelline(element.vote_average);
+                    });
                 axios.get('https://api.themoviedb.org/3/search/tv', {
                 params: {
                     api_key: 'c118f218a2e8045c8dc9d93ebeb85c9b',
@@ -64,11 +82,11 @@ export default {
             })
                 .then( (response) => {
                     this.rispostaApiTV = response.data.results;
-                    this.rispostaApi = this.rispostaApiMovie.concat(this.rispostaApiTV);
-                    this.rispostaApi.forEach(element => {
+                    this.rispostaApiTV.forEach(element => {
                         element.voto_arrotondato = {};
                         return element.voto_arrotondato = this.getStelline(element.vote_average);
                     });
+                    this.caricato = true;
             })
             })
             .catch(function (error) {
