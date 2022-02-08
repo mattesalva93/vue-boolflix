@@ -21,14 +21,14 @@
                     <h1>Movies</h1>
                     <Catalogo-richiesto 
                     v-for="(element, index) in rispostaApiMovie"
-                    :key="index"
+                    :key="'movie-' + index"
                     :film=element />
                 </div>
                 <div class="row d-flex justify-content-space-around">
                     <h1>Series</h1>
                     <Catalogo-richiesto 
                     v-for="(element, index) in rispostaApiTV"
-                    :key="index"
+                    :key="'series-' + index"
                     :film=element />
                 </div>
             </div>
@@ -74,12 +74,12 @@ export default {
                         return element.voto_arrotondato = this.getStelline(element.vote_average);
                     });
                 axios.get('https://api.themoviedb.org/3/search/tv', {
-                params: {
-                    api_key: 'c118f218a2e8045c8dc9d93ebeb85c9b',
-                    language: 'it-IT',
-                    query: this.ricercaUtente,
-                }
-            })
+                    params: {
+                        api_key: 'c118f218a2e8045c8dc9d93ebeb85c9b',
+                        language: 'it-IT',
+                        query: this.ricercaUtente,
+                    }
+                })
                 .then( (response) => {
                     this.rispostaApiTV = response.data.results;
                     this.rispostaApiTV.forEach(element => {

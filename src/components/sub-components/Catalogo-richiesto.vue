@@ -23,8 +23,8 @@
                 </div>
                 <div>
                     SCORE:
-                    <i v-for="(elemento, index) in film.voto_arrotondato" :key="index" class="fas fa-star"></i>
-                    <i v-for="(elemento, index) in (5 - film.voto_arrotondato) " :key="index" class="far fa-star"></i>                
+                    <i v-for="(elemento, index) in film.voto_arrotondato" :key="'fullstar-'+ elemento + index" class="fas fa-star"></i>
+                    <i v-for="(elemento, index) in (5 - film.voto_arrotondato) " :key="'emptystar-'+ elemento + index" class="far fa-star"></i>                
                 </div>
             </div>
         </div>
